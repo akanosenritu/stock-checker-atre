@@ -24,7 +24,7 @@ const defaultConstraints = {
 
 const defaultLocatorSettings = {
     patchSize: 'medium',
-    halfSample: true,
+    halfSample: false,
 }
 
 const defaultDecoders = ['ean_reader'];
@@ -43,7 +43,7 @@ const Scanner = (props: Props) => {
   const locator = defaultLocatorSettings
   const numOfWorkers = navigator.hardwareConcurrency || 0
   const decoders = defaultDecoders
-  const locate = true
+  const locate = false
   const errorCheck: QuaggaJSResultCallbackFunction = useCallback((result) => {
       if (!onDetected) {
           return
