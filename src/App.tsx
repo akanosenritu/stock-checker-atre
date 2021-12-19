@@ -12,9 +12,10 @@ const App = () => {
   const scannerRef = useRef(null)
 
   const [searchBy, setSearchBy] = useState<{janCode?: string, itemName?: string}>({})
-
+  const [results, setResults] = useState<string[]>([])
   const onDetected = (result: string) => {
     setSearchBy(searchBy => ({...searchBy, janCode: result}))
+    setResults(results => [...results, result])
   }
 
   return <div>
@@ -42,6 +43,8 @@ const App = () => {
     }}> 
       <Button onClick={()=>setScanning(!scanning)}>{scanning? "止める": "バーコードをスキャンする"}</Button>
     </Box>
+    <hr />
+    {results.map(result => result)}
     <hr />
     <Box sx={{
       mx: 3,
