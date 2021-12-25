@@ -11,4 +11,4 @@ export type ProductsInfo = {
     products: ProductInfo[]
 }
   
-export const ProductsInfoContext = createContext<ProductsInfo>({total: 0, products: []})
+export const ProductsInfoContext = createContext<ProductsInfo|null>(null)

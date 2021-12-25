@@ -1,4 +1,4 @@
-import {useState,useRef} from "react"
+import {useState,useRef, ChangeEvent} from "react"
 import './App.css'
 import Scanner from "./Scanner"
 import Button from "@mui/material/Button"
@@ -9,9 +9,22 @@ import ShowSearchResult from "./ShowSearchResult"
 const Main = () => {
     const [scanning, setScanning] = useState(false)
     const scannerRef = useRef(null)
-  
-    const [searchBy, setSearchBy] = useState<{janCode?: string, itemName?: string}>({})
     
+
+    const [searchBy, setSearchBy] = useState<{janCode?: string, itemName?: string}>({})
+    const handleJanCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setSearchBy(searchBy => ({
+        ...searchBy,
+        janCode: event.target.value
+      }))
+    }
+    const handleItemNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setSearchBy(searchBy => ({
+        ...searchBy,
+        itemName: event.target.value
+      }))
+    }
+
     const onDetected = (result: string) => {
       setSearchBy(searchBy => ({...searchBy, janCode: result}))
     }
@@ -50,6 +63,7 @@ const Main = () => {
           fullWidth={true}
           label={"JANコード"}
           value={searchBy.janCode}
+          onChange={handleJanCodeChange}
           InputLabelProps={{
             shrink: true
           }}
@@ -58,6 +72,7 @@ const Main = () => {
           fullWidth={true}
           label={"商品名"}
           value={searchBy.itemName}
+          onChange={handleItemNameChange}
           InputLabelProps={{
             shrink: true
           }}
